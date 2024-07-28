@@ -163,5 +163,6 @@ cython_debug/
 
 runs/*
 models/*
+output_videos/*
 tennis_court_det_dataset.zip
 yolov8x.pt
