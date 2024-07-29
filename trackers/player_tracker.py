@@ -3,7 +3,7 @@ import cv2
 import pickle
 import sys
 sys.path.append('../')
-# from utils import measure_distance, get_center_of_bbox
+from utils import measure_distance, get_center_of_bbox
 
 class PlayerTracker:
     def __init__(self,model_path):
@@ -18,24 +18,24 @@ class PlayerTracker:
             filtered_player_detections.append(filtered_player_dict)
         return filtered_player_detections
 
-    # def choose_players(self, court_keypoints, player_dict):
-    #     distances = []
-    #     for track_id, bbox in player_dict.items():
-    #         player_center = get_center_of_bbox(bbox)
+    def choose_players(self, court_keypoints, player_dict):
+        distances = []
+        for track_id, bbox in player_dict.items():
+            player_center = get_center_of_bbox(bbox)
 
-    #         min_distance = float('inf')
-    #         for i in range(0,len(court_keypoints),2):
-    #             court_keypoint = (court_keypoints[i], court_keypoints[i+1])
-    #             distance = measure_distance(player_center, court_keypoint)
-    #             if distance < min_distance:
-    #                 min_distance = distance
-    #         distances.append((track_id, min_distance))
+            min_distance = float('inf')
+            for i in range(0,len(court_keypoints),2):
+                court_keypoint = (court_keypoints[i], court_keypoints[i+1])
+                distance = measure_distance(player_center, court_keypoint)
+                if distance < min_distance:
+                    min_distance = distance
+            distances.append((track_id, min_distance))
         
-    #     # sorrt the distances in ascending order
-    #     distances.sort(key = lambda x: x[1])
-    #     # Choose the first 2 tracks
-    #     chosen_players = [distances[0][0], distances[1][0]]
-    #     return chosen_players
+        # sorrt the distances in ascending order
+        distances.sort(key = lambda x: x[1])
+        # Choose the first 2 tracks
+        chosen_players = [distances[0][0], distances[1][0]]
+        return chosen_players
 
 
     def detect_frames(self,frames, read_from_stub=False, stub_path=None):
