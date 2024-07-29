@@ -162,7 +162,9 @@ cython_debug/
 #.idea/
 
 runs/*
-models/*
 output_videos/*
 tennis_court_det_dataset.zip
 yolov8x.pt
+yolov5_last.pt
+yolov5_best.pt
+keypoints_model.pth
